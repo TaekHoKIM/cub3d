@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:38:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 19:09:50 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/22 20:13:11 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	input_rgb_sub2(char *line, t_map_info *map_info, int flag);
 static void	input_rgb_sub3(t_map_info *map_info, int flag, int rgb, int val);
 static int	check_full_rgb(t_map_info *map_info);
 static void	check_num(char **split_set);
+static void	check_comma(char *line);
 
 void	map_input_rgb(int fd, t_map_info *map_info)
 {
@@ -72,6 +73,7 @@ static void	input_rgb_sub2(char *line, t_map_info *map_info, int flag)
 	sub_str = ft_substr(line, 2, l - 3);
 	tmp = ft_strtrim(sub_str, " ");
 	free(sub_str);
+	check_comma(tmp);
 	split_set = ft_split(tmp, ',');
 	free(tmp);
 	check_num(split_set);
@@ -156,5 +158,22 @@ static void	check_num(char **split_set)
 		}
 		count++;
 	}
+	return ;
+}
+
+static void	check_comma(char *line)
+{
+	int	count;
+	int	i;
+
+	count = 0;
+	while (line[i] != '\0')
+	{
+		if (line[i] == ',')
+			count++;
+		i++;
+	}
+	if (count != 2)
+		exit(EXIT_FAILURE);
 	return ;
 }

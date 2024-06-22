@@ -6,17 +6,24 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:00:06 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 19:17:09 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/22 20:09:40 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map_parse.h"
 
+void leak()
+{
+	system("leaks a.out");
+}
+
 int main()
 {
 	t_map_info	*map_info;
 	int			i;
+	t_node		*test;
 
+	// atexit(leak);
 	map_info = map_parsing("test.cub");
 	printf("success\n");
 	printf("no_filenam:%s\n",map_info->no_filename);
