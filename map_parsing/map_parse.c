@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:55:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 19:05:16 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/23 15:58:18 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	map_init(t_map_info *map_info)
 	map_info->ceiling_r = -1;
 	map_info->ceiling_g = -1;
 	map_info->ceiling_b = -1;
+	map_info->s_x = 0;
+	map_info->s_y = 0;
+	map_info->s_dir = ' ';
 	map_info->map = NULL;
 	return ;
 }

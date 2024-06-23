@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 16:46:15 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:00:34 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ typedef struct map_info
 	int		ceiling_r;
 	int		ceiling_g;
 	int		ceiling_b;
+	int		s_x;
+	int		s_y;
+	char	s_dir;
+	int		map_size_x;
+	int		map_size_y;
 	char	**map;
 }	t_map_info;
 

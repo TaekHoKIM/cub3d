@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:32:34 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 17:46:33 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:09:17 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int		check_valid_line(char *line);
 static void		input_node(t_node *start, char *line);
 static t_node	*make_start_node(int fd);
+static void		input_start_info(t_map_info *map_info);
 
 void	input_map(int fd, t_map_info *map_info)
 {
@@ -24,6 +25,7 @@ void	input_map(int fd, t_map_info *map_info)
 	start = make_start_node(fd);
 	map = map_make_map(start);
 	map_info->map = map;
+	input_start_info(map_info);
 }
 
 static int	check_valid_line(char *line)
@@ -103,3 +105,35 @@ static t_node	*make_start_node(int fd)
 	return (start);
 }
 
+static void	input_start_info(t_map_info *map_info)
+{
+	int		i;
+	int		j;
+	char	**map;
+
+	map = map_info->map;
+	i = 0;
+	while (map[i] != NULL)
+		i++;
+	map_info->map_size_y = i;
+	if (i == 0)
+		exit(EXIT_FAILURE);
+	map_info->map_size_x = ft_strlen(map[0]);
+	i = 0;
+	while (i < map_info->map_size_y)
+	{
+		j = 0;
+		while (j < map_info->map_size_x)
+		{
+			if (map[i][j] == 'N' || map[i][j] == 'S'
+					|| (map[i][j] == 'E') || map[i][j] == 'W')
+			{
+				map_info->s_x = j;
+				map_info->s_y = i;
+				map_info->s_dir = map[i][j];
+			}
+			j++;
+		}
+		i++;
+	}
+}

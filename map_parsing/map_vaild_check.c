@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 19:12:28 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/23 16:08:08 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ static int	check_surround(char **map, int width, int height)
 		j = 0;
 		while (j < width)
 		{
-			if (map[i][j] == '0')
+			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
+					|| (map[i][j] == 'E') || map[i][j] == 'W')
 			{
 				if ((j + 1 < width) && (map[i][j + 1] == ' '))
 					return (FAIL);
