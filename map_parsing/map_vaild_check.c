@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/23 16:08:08 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:51 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 static int	map_content_check(char **map, int width, int height);
 static int	check_surround(char **map, int width, int height);

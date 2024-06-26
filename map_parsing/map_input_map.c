@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:32:34 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/23 16:09:17 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:38:07 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 static int		check_valid_line(char *line);
 static void		input_node(t_node *start, char *line);

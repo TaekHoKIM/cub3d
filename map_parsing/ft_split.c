@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:42:22 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/21 19:51:32 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:23 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 static size_t	array_count(char const *s, char c);
 static char		**copy_str(char **ptr, const char *s, char c);

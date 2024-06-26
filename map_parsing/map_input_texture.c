@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:29:39 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 19:11:07 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:43 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 static void	input_texture_sub1(char *line, t_map_info *map_info);
 static void	input_texture_sub2(char *line, t_map_info *map_info, int i);

@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:55:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/23 15:58:18 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:49 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 t_map_info	*map_parsing(char *map_name)
 {

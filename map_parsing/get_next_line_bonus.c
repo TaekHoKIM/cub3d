@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:39:49 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/21 18:57:16 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:33 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 char	*get_next_line(int fd)
 {

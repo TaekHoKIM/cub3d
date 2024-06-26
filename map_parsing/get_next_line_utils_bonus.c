@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 14:40:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/21 18:57:21 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:35 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 t_temp	*new_node(int fd)
 {

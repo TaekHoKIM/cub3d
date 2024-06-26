@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:39:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/22 15:46:35 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:31 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 size_t	ft_strlen(const char *s)
 {

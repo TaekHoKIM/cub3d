@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parse.h                                        :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/23 16:00:34 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:21:38 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_PARSE_H
-# define MAP_PARSE_H
+#ifndef MAIN_H
+# define MAIN_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -21,9 +21,15 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <mlx.h>
+# include <math.h>
 
 # define SUCCESS 0
 # define FAIL -1
+# define DIR_DIS 1
+# define PLANE_DIS 1
+# define WIN_SIZE_X 1000
+# define WIN_SIZE_Y 500
 
 typedef struct s_node
 {
@@ -60,6 +66,18 @@ typedef struct single_node
 	struct single_node	*next;
 }	t_node;
 
+typedef struct ray_cast
+{
+	double	pos_x;			// 내 위치
+	double	pos_y;
+	double	dir_x;			// 바라보는 방향
+	double	dir_y;
+	double	plane_x;		// 시야 평면 방향
+	double	plane_y;
+
+}	t_ray_cast;
+
+// map_parsing.dir -------------------------------------
 // get_next_line_bonus.c
 char		*get_next_line(int fd);
 char		*result(t_temp *c_node, t_temp **start, char *restr);
@@ -105,4 +123,18 @@ char		**map_make_map(t_node	*start);
 // map_vaild_check.c
 void		map_vaild_check(char **map);
 
+// map_parsing.dir -------------------------------------
+
+
+// rat_cast
+int			ray_cast(t_map_info *map_info, void	*mlx, void *win);
+
+// ray_init.c
+int			ray_init(t_map_info *map_info, t_ray_cast *ray_info);
+
+// ray_input_win.c
+void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info, void *mlx, void *win);
+
+// math_utils.c
+double		calculatedistance(double x1, double y1, double x2, double y2);
 #endif

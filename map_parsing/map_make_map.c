@@ -6,11 +6,11 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:23:55 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/23 15:58:53 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:56:46 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parse.h"
+#include "../main.h"
 
 static int	map_count(t_node *start);
 static void	map_input_line(t_node *start, char **map);
