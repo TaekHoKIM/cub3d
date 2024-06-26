@@ -6,14 +6,14 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:52:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 19:39:28 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:45:05 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
 static double	ray_distance(t_map_info *map_info, t_ray_cast *ray_info,
-	char *wall_dir, int idx);
+					char *wall_dir, int idx);
 
 void	ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
 	void *mlx, void *win)

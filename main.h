@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 19:32:50 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:44:11 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,6 @@ void		map_vaild_check(char **map);
 
 // map_parsing.dir -------------------------------------
 
-
 // rat_cast
 int			ray_cast(t_map_info *map_info, void	*mlx, void *win);
 
@@ -133,7 +132,8 @@ int			ray_cast(t_map_info *map_info, void	*mlx, void *win);
 int			ray_init(t_map_info *map_info, t_ray_cast *ray_info);
 
 // ray_input_win.c
-void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info, void *mlx, void *win);
+void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
+				void *mlx, void *win);
 
 // math_utils.c
 double		calculatedistance(double x1, double y1, double x2, double y2);
