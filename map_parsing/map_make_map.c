@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_make_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:23:55 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:46 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:34:38 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,3 @@ static void	copy_line(char *line, char *new_line, int max_len)
 		i++;
 	}
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sub.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:39:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:31 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:33:57 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_atoi(const char *str)
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		return_value *= 10;
-		return_value += str[i] - '0';	
+		return_value += str[i] - '0';
 		i++;
 	}
 	return ((int)(return_value * (long long)minus));
