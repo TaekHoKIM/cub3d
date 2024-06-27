@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 19:44:11 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:53:17 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define PLANE_DIS 1
 # define WIN_SIZE_X 1000
 # define WIN_SIZE_Y 500
+# define Q1 1
+# define Q2 2
+# define Q3 3
+# define Q4 4
 
 typedef struct s_node
 {
@@ -137,4 +141,6 @@ void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
 
 // math_utils.c
 double		calculatedistance(double x1, double y1, double x2, double y2);
+void	converttounitvector(double a, double b, double *unitA, double *unitB);
+
 #endif
