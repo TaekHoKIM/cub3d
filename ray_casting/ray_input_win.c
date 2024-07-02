@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:52:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 21:15:08 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:44:30 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
 	while (i < WIN_SIZE_X)
 	{
 		dis = ray_distance(map_info, ray_info, wall_dir, i);
+		printf("dis:%lf\n",dis);
 		put_pixel(map_info, mlx, win, dis, i);
 		i++;
 	}
@@ -50,8 +51,8 @@ static double	ray_distance(t_map_info *map_info, t_ray_cast *ray_info,
 
 	wall_dir = 'T';
 	tmp = (2 * (double)DIR_DIS / WIN_SIZE_X) * idx;
-	a = ray_info->dir_x - ray_info->plane_x + (tmp * ray_info->plane_x);
-	b = ray_info->dir_y - ray_info->plane_y + (tmp * ray_info->plane_y);
+	a = ray_info->dir_x - (ray_info->plane_x * PLANE_DIS) + (tmp * ray_info->plane_x * PLANE_DIS);
+	b = ray_info->dir_y - (ray_info->plane_y * PLANE_DIS) + (tmp * ray_info->plane_y * PLANE_DIS);
 	converttounitvector(a, b, &a, &b);				// a,b 단위벡터로 변경
 	return (ray_distance_sub(map_info, ray_info, a, b));
 }
@@ -131,9 +132,8 @@ static double	ray_distance_x(t_map_info *map_info, t_ray_cast *ray_info,
 				return (FAIL);
 		}
 	}
-	
 	// 여기에서 x,y는 hit된 지점의 x,y 임
-	return (distance_plane(ray_info, x, y));
+	return (distance_plane(ray_info, (double)x, y));
 }
 
 static double	ray_distance_y(t_map_info *map_info, t_ray_cast *ray_info,
@@ -171,7 +171,7 @@ static double	ray_distance_y(t_map_info *map_info, t_ray_cast *ray_info,
 				return (FAIL);
 		}
 	}
-	return (distance_plane(ray_info, x, y));
+	return (distance_plane(ray_info, x, (double)y));
 }
 
 static double	ray_distance_x_y_zero(t_map_info *map_info, t_ray_cast *ray_info,

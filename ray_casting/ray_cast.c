@@ -6,20 +6,15 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 21:16:51 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:59:20 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
 static int	get_wall_size(t_map_info *map_info, double distance);
-static void	handle_keypress(int keycode, void *param);
+static void	rendering_loop(void *param);
 static void	handle_keyhook(int keycode, void *param);
-
-int is_unit_vector(double x, double y) {
-    double length = sqrt(x * x + y * y);
-    return fabs(length - 1.0) < 0.000001;
-}
 
 int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 {
@@ -33,8 +28,8 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 	total.ray_info = &ray_info;
 	total.mlx = mlx;
 	total.win = win;
-	mlx_key_hook(win, handle_keyhook, (void *)&total);
-	mlx_hook(win, 2, 1L<<0, handle_keypress, (void *)&total);
+	mlx_loop_hook(mlx, rendering_loop, (void *)&total);
+	mlx_hook(win, 2, 1L<<0, handle_keyhook, (void *)&total);
 	mlx_loop(mlx);
 	return (SUCCESS);
 }
@@ -81,25 +76,25 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 			// data_addr[pixel + 3] = 0; // 알파 채널 (필요한 경우)
 		}
 	}
-	mlx_put_image_to_window(mlx, win, map_info->image, 0, 0);
 }
 
 static int	get_wall_size(t_map_info *map_info, double distance)
 {
 	double	wall_size;
 
-	if (distance < 1)
-		return (WIN_SIZE_Y);
-	wall_size = (WIN_SIZE_Y / distance) * R_SIZE;
+	// if (distance < 1)
+	// 	return (WIN_SIZE_Y);
+	wall_size = ((WIN_SIZE_Y / distance) * R_SIZE);
 	return((int)wall_size);
 }
 
-static void	handle_keypress(int keycode, void *param)
+static void	rendering_loop(void *param)
 {
 	t_total			*total_info;
+	int				i;
 
 	total_info = (t_total *)param;
-	ray_input_win(total_info->map_info, total_info->ray_info, total_info->mlx, total_info->win);
+	mlx_put_image_to_window(total_info->mlx, total_info->win, total_info->map_info->image, 0, 0);
 }
 
 static void	handle_keyhook(int keycode, void *param)
@@ -111,6 +106,7 @@ static void	handle_keyhook(int keycode, void *param)
 	total_info = (t_total *)param;
 	ray_info = total_info->ray_info;
 	theta = 1.0 * M_PI / 180.0 * R_ANGLE;
+	// key 이동 이상함 - 위치 이동 문제
 	if (keycode == ESC)
 	{
 		printf("ESC key pressed. Exiting...\n");
@@ -120,21 +116,41 @@ static void	handle_keyhook(int keycode, void *param)
 	{
 		ray_info->pos_x += ray_info->dir_x * R_STEP;
 		ray_info->pos_y -= ray_info->dir_y * R_STEP;
+		if (total_info->map_info->map[(int)ray_info->pos_y][(int)ray_info->pos_x] == '1')
+		{
+			ray_info->pos_x -= ray_info->dir_x * R_STEP;
+			ray_info->pos_y += ray_info->dir_y * R_STEP;
+		}
 	}
 	else if (keycode == A_KEY)
 	{
 		ray_info->pos_x -= ray_info->dir_y * R_STEP;
-		ray_info->pos_y += ray_info->dir_x * R_STEP;
+		ray_info->pos_y -= ray_info->dir_x * R_STEP;
+		if (total_info->map_info->map[(int)ray_info->pos_y][(int)ray_info->pos_x] == '1')
+		{
+			ray_info->pos_x += ray_info->dir_y * R_STEP;
+			ray_info->pos_y += ray_info->dir_x * R_STEP;
+		}
 	}
 	else if (keycode == S_KEY)
 	{
 		ray_info->pos_x -= ray_info->dir_x * R_STEP;
 		ray_info->pos_y += ray_info->dir_y * R_STEP;
+		if (total_info->map_info->map[(int)ray_info->pos_y][(int)ray_info->pos_x] == '1')
+		{
+			ray_info->pos_x += ray_info->dir_x * R_STEP;
+			ray_info->pos_y -= ray_info->dir_y * R_STEP;
+		}
 	}
 	else if (keycode == D_KEY)
 	{
 		ray_info->pos_x += ray_info->dir_y * R_STEP;
-		ray_info->pos_y -= ray_info->dir_x * R_STEP;
+		ray_info->pos_y += ray_info->dir_x * R_STEP;
+		if (total_info->map_info->map[(int)ray_info->pos_y][(int)ray_info->pos_x] == '1')
+		{
+			ray_info->pos_x -= ray_info->dir_y * R_STEP;
+			ray_info->pos_y -= ray_info->dir_x * R_STEP;
+		}
 	}
 	else if (keycode == RIGHT_ARROW_KEY)
 	{
@@ -148,11 +164,10 @@ static void	handle_keyhook(int keycode, void *param)
 		converttounitvector(ray_info->dir_x, ray_info->dir_y, &ray_info->dir_x, &ray_info->dir_y);
 		plane_angle(ray_info);
 	}
-	printf("is_unit:%d\n",is_unit_vector(ray_info->dir_x, ray_info->dir_y));
-	printf("is_unit:%d\n",is_unit_vector(ray_info->plane_x,ray_info->plane_y));
 	printf("dir_x:%lf / dir_y:%lf\n",ray_info->dir_x, ray_info->dir_y);
 	printf("pos_x:%lf / pos_y:%lf\n",ray_info->pos_x, ray_info->pos_y);
 	printf("plane_x:%lf / plane_y:%lf\n",ray_info->plane_x, ray_info->plane_y);
+	ray_input_win(total_info->map_info, total_info->ray_info, total_info->mlx, total_info->win);
 	// 움직일때 벽 통과 해결해야됨, 각도 제대로 변하는 지 확인해야함
 }
 

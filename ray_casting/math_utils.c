@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:20:02 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 16:48:22 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:44:42 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,42 @@ void	converttounitvector(double a, double b, double *unitA, double *unitB)
 	}
 }
 
+// double distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit) {
+//     // 선의 방향 벡터 (x2 - x1, y2 - y1)
+//     double A = -ray_info->dir_y;
+//     double B = ray_info->dir_x;
+//     double C = ray_info->pos_x * (ray_info->pos_y + ray_info->dir_y) - ray_info->pos_y * (ray_info->pos_x + ray_info->dir_x);
+
+//     // 거리 공식
+//     double distance = fabs(A * x_hit + B * y_hit + C) / sqrt(A * A + B * B);
+
+//     return distance;
+//}
+static double distance_point_to_line(double x, double y, double x1, double y1, double x2, double y2) {
+    // 선의 방향 벡터 (x2 - x1, y2 - y1)
+    double A = y2 - y1;
+    double B = x1 - x2;
+    double C = x2 * y1 - y2 * x1;
+
+    // 거리 공식
+    double distance = fabs(A * x + B * y + C) / sqrt(A * A + B * B);
+
+    return distance;
+}
+
 double	distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit)
 {
-	double	t;
-	double	rx;
-	double	ry;
-	double	distance;
 
-	t = ((x_hit - ray_info->pos_x) * ray_info->plane_x + (y_hit - ray_info->pos_y) * ray_info->plane_y);
-	rx = ray_info->pos_x + t * ray_info->plane_x;
-	ry = ray_info->pos_y + t * ray_info->plane_y;
-	distance = sqrt((x_hit - rx) * (x_hit - rx) + (y_hit - ry) * (y_hit - ry));
-	return (distance);
+      // 선의 방향 벡터 (x2 - x1, y2 - y1)
+   
+	return (distance_point_to_line(x_hit,y_hit, ray_info->pos_x, ray_info->pos_y, ray_info->pos_x + ray_info->plane_x, ray_info->pos_y + ray_info->plane_y));
+	// printf("px:%lf / py:%lf\n",ray_info->plane_x, ray_info->plane_y);
+	// printf("posx:%lf / posy:%lf\n",ray_info->pos_x, ray_info->pos_y);
+	// printf("x_hit:%lf / y_hit:%lf\n",x_hit, y_hit);
+	// printf("dir_dis:%lf\n",calculatedistance(x_hit, y_hit, ray_info->pos_x, ray_info->pos_y));
+	// printf("distance:%lf\n",distance);
+	// return (distance);
+	// return (calculatedistance(x_hit, y_hit, ray_info->pos_x, ray_info->pos_y));
 }
 
 void rotateclockwise(double a, double b, double theta, double *newX, double *newY)

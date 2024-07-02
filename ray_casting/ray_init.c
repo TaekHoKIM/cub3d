@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:27:49 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 19:32:51 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:16:25 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	plane_init(t_map_info *map_info, t_ray_cast *ray_info)
 {
 	if (map_info->s_dir == 'N' || map_info->s_dir == 'S')
 	{
-		ray_info->plane_x = 1 * PLANE_DIS;
+		ray_info->plane_x = 1;
 		ray_info->plane_y = 0;
 		if (map_info->s_dir == 'S')
 			ray_info->plane_x *= -1;
@@ -65,7 +65,7 @@ int	plane_init(t_map_info *map_info, t_ray_cast *ray_info)
 	else if (map_info->s_dir == 'E' || map_info->s_dir == 'W')
 	{
 		ray_info->plane_x = 0;
-		ray_info->plane_y = 1 * PLANE_DIS;
+		ray_info->plane_y = 1;
 		if (map_info->s_dir == 'W')
 			ray_info->plane_y *= -1;
 	}

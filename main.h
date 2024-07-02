@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 21:13:45 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/02 19:51:11 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 # define SUCCESS 0
 # define FAIL -1
 # define DIR_DIS 1
-# define PLANE_DIS 1
+# define PLANE_DIS 0.73
 # define WIN_SIZE_X 1000
 # define WIN_SIZE_Y 500
 # define R_SIZE 1
-# define R_STEP 1
-# define R_ANGLE 45
+# define R_STEP 0.1
+# define R_ANGLE 2
 # define Q1 1
 # define Q2 2
 # define Q3 3
