@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/02 19:59:20 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:15:05 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@ static void	handle_keyhook(int keycode, void *param);
 
 int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 {
-	t_ray_cast		ray_info;
-	t_total			total;
+	t_ray_cast		*ray_info;
+	t_total			*total;
 
+	total = (t_total *)malloc(sizeof(t_total));
+	ray_info = (t_ray_cast *)malloc(sizeof(t_ray_cast));
 	map_info->image = mlx_new_image(mlx, WIN_SIZE_X, WIN_SIZE_Y);
-	ray_init(map_info, &ray_info);
-	ray_input_win(map_info, &ray_info, mlx, win);
-	total.map_info = map_info;
-	total.ray_info = &ray_info;
-	total.mlx = mlx;
-	total.win = win;
-	mlx_loop_hook(mlx, rendering_loop, (void *)&total);
-	mlx_hook(win, 2, 1L<<0, handle_keyhook, (void *)&total);
-	mlx_loop(mlx);
-	return (SUCCESS);
+	ray_init(map_info, ray_info);
+	ray_input_win(map_info, ray_info, mlx, win);
+	total->map_info = map_info;
+	total->ray_info = ray_info;
+	total->mlx = mlx;
+	total->win = win;
+	mlx_loop_hook(mlx, rendering_loop, (void *)total);
+	mlx_hook(win, 2, 1L<<0, handle_keyhook, (void *)total);
 }
 // 이미지 
 // 렌더링 함수 -> 이미지를 계속 그리기만 하고 <- 이미지를 그릴 때 사용되는 조건들
@@ -47,10 +47,19 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 	int 	pixel;
 	int		x;
 	int		y;
+	int		tmp;
 
  	data_addr = mlx_get_data_addr(map_info->image, &bpp, &size_line, &endian);
 	wall_size = get_wall_size(map_info, distance);
 	x = idx;
+	if (map_info->wall_dir == WALL_E)
+		tmp = 0;
+	else if (map_info->wall_dir == WALL_W)
+		tmp = 50;
+	else if (map_info->wall_dir == WALL_S)
+		tmp = 100;
+	else if (map_info->wall_dir == WALL_N)
+		tmp = 150;
 	for (y = 0; y < WIN_SIZE_Y; y++)
 	{
 		pixel = (y * size_line) + (x * (bpp / 8));
@@ -63,7 +72,7 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 		}
 		else if (y < abs(WIN_SIZE_Y - wall_size) / 2 + wall_size)
 		{
-			data_addr[pixel] = 255;       // 블루 채널
+			data_addr[pixel] = tmp;       // 블루 채널
 			data_addr[pixel + 1] = 0;   // 그린 채널
 			data_addr[pixel + 2] = 0; // 레드 채널
 			// data_addr[pixel + 3] = 0; // 알파 채널 (필요한 경우)
@@ -82,8 +91,8 @@ static int	get_wall_size(t_map_info *map_info, double distance)
 {
 	double	wall_size;
 
-	// if (distance < 1)
-	// 	return (WIN_SIZE_Y);
+	if (distance < R_SIZE)
+		return (WIN_SIZE_Y);
 	wall_size = ((WIN_SIZE_Y / distance) * R_SIZE);
 	return((int)wall_size);
 }

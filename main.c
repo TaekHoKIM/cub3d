@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:54:09 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/01 20:33:45 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/03 13:52:03 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,26 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	map_info = map_parsing(argv[1]);
 	ray_cast(map_info, mlx, win);
-	
+	mlx_loop(mlx);
+}
+
+void	display_map(t_map_info *map_info)
+{
+	int	i;
+	int	j;
+
+	printf("---------------------------\n");
+	i = 0;
+	while (i < map_info->map_size_y)
+	{
+		j = 0;
+		while (j < map_info->map_size_x)
+		{
+			printf("%c",map_info->map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}
+	printf("---------------------------\n");
 }

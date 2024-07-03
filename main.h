@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/02 19:51:11 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:15:03 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define WIN_SIZE_Y 500
 # define R_SIZE 1
 # define R_STEP 0.1
-# define R_ANGLE 2
+# define R_ANGLE 45
 # define Q1 1
 # define Q2 2
 # define Q3 3
@@ -46,6 +46,10 @@
 # define D_KEY 2
 # define LEFT_ARROW_KEY 123
 # define RIGHT_ARROW_KEY 124
+# define WALL_N 0
+# define WALL_S 1
+# define WALL_W 2
+# define WALL_E 3
 # define FRAME_TIME_MICROSEC (1000000 / 60) // 60 FPS
 
 typedef struct s_node
@@ -76,6 +80,9 @@ typedef struct map_info
 	int		map_size_y;
 	char	**map;
 	void	*image;
+	int		wall_dir;
+	double	x_hit;
+	double	y_hit;
 }	t_map_info;
 
 typedef struct single_node
@@ -170,4 +177,8 @@ void		converttounitvector(double a, double b, double *unitA, double *unitB);
 double		distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit);
 void 		rotateclockwise(double a, double b, double theta, double *newX, double *newY);
 void 		rotatecounterclockwise(double a, double b, double theta, double *newX, double *newY);
+
+
+// temp
+void	display_map(t_map_info *map_info);
 #endif

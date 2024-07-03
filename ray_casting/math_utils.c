@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:20:02 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/02 19:44:42 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:13:51 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ double	distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit)
 
       // 선의 방향 벡터 (x2 - x1, y2 - y1)
    
-	return (distance_point_to_line(x_hit,y_hit, ray_info->pos_x, ray_info->pos_y, ray_info->pos_x + ray_info->plane_x, ray_info->pos_y + ray_info->plane_y));
+	// return (distance_point_to_line(x_hit,y_hit, ray_info->pos_x, ray_info->pos_y, ray_info->pos_x + ray_info->plane_x, ray_info->pos_y + ray_info->plane_y));
 	// printf("px:%lf / py:%lf\n",ray_info->plane_x, ray_info->plane_y);
 	// printf("posx:%lf / posy:%lf\n",ray_info->pos_x, ray_info->pos_y);
 	// printf("x_hit:%lf / y_hit:%lf\n",x_hit, y_hit);
 	// printf("dir_dis:%lf\n",calculatedistance(x_hit, y_hit, ray_info->pos_x, ray_info->pos_y));
 	// printf("distance:%lf\n",distance);
 	// return (distance);
-	// return (calculatedistance(x_hit, y_hit, ray_info->pos_x, ray_info->pos_y));
+	return (calculatedistance(x_hit, y_hit, ray_info->pos_x, ray_info->pos_y));
 }
 
 void rotateclockwise(double a, double b, double theta, double *newX, double *newY)
