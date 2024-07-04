@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/03 17:40:49 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/04 22:14:39 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@
 # define WALL_W 2
 # define WALL_E 3
 # define FRAME_TIME_MICROSEC (1000000 / 60) // 60 FPS
+
+enum	e_dir{
+	NO = 0,
+	SO = 1,
+	WE = 2,
+	EA = 3
+};
 
 typedef struct s_node
 {
@@ -109,6 +116,17 @@ typedef struct total_info
 	t_map_info	*map_info;
 	t_ray_cast	*ray_info;
 }	t_total;
+
+typedef struct s_img
+{
+	void		*img_ptr;
+	char		*data;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}	t_img;
 
 
 // map_parsing.dir -------------------------------------
