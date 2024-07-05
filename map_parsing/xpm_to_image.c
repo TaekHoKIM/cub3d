@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:19:00 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/05 19:37:13 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:31:08 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 static void	xpm_to_image(void *mlx_ptr, t_img *img, char *file_name)
 {
-	// 임시
-	img->width = 64;
-	img->height = 64;
-	//
 	img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_name,
 		&(img->width), &(img->height));
 	if (img->img_ptr == NULL)
