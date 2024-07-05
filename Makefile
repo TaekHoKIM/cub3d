@@ -10,10 +10,12 @@ SOURS = 						./map_parsing/map_parse.c								\
 								./map_parsing/map_input_texture.c						\
 								./map_parsing/map_make_map.c							\
 								./map_parsing/map_vaild_check.c							\
+								./map_parsing/xpm_to_image.c							\
 								./ray_casting/ray_cast.c								\
 								./ray_casting/ray_init.c								\
 								./ray_casting/ray_input_win.c							\
-								./ray_casting/math_utils.c							\
+								./ray_casting/math_utils.c								\
+								./ray_casting/get_pixel_in_wall.c						\
 								./main.c
 	
 MAN_OBJS = ${SOURS:.c=.o}

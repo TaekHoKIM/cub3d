@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   xpm_to_image.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:19:00 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/04 22:16:41 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:37:13 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "main.h"
+#include "../main.h"
 
 static void	xpm_to_image(void *mlx_ptr, t_img *img, char *file_name)
 {
+	// 임시
+	img->width = 64;
+	img->height = 64;
+	//
 	img->img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_name,
 		&(img->width), &(img->height));
 	if (img->img_ptr == NULL)
@@ -59,12 +63,16 @@ void	dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img)
 	*img = malloc(sizeof(t_img) * 4);
 	if (*img == NULL)
 		exit(EXIT_FAILURE);
-	xpm_file_square_check(info->no_filename, &((*img)[NO]));
+	// xpm_file_square_check(info->no_filename, &((*img)[NO]));
 	xpm_to_image(mlx_ptr, &((*img)[NO]), info->no_filename);
-	xpm_file_square_check(info->no_filename, &((*img)[SO]));
+	(*img)[NO].type = NO;
+	// xpm_file_square_check(info->no_filename, &((*img)[SO]));
 	xpm_to_image(mlx_ptr, &((*img)[SO]), info->so_filename);
-	xpm_file_square_check(info->no_filename, &((*img)[WE]));
+	(*img)[SO].type = SO;
+	// xpm_file_square_check(info->no_filename, &((*img)[WE]));
 	xpm_to_image(mlx_ptr, &((*img)[WE]), info->we_filename);
-	xpm_file_square_check(info->no_filename, &((*img)[EA]));
+	(*img)[WE].type = WE;
+	// xpm_file_square_check(info->no_filename, &((*img)[EA]));
 	xpm_to_image(mlx_ptr, &((*img)[EA]), info->ea_filename);
+	(*img)[EA].type = EA;
 }

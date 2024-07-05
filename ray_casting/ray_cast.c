@@ -6,7 +6,7 @@
 /*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/03 16:15:05 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/05 20:01:17 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ static void	handle_keyhook(int keycode, void *param);
 int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 {
 	t_ray_cast		*ray_info;
+	t_img			*wall_image_set;
 	t_total			*total;
 
 	total = (t_total *)malloc(sizeof(t_total));
 	ray_info = (t_ray_cast *)malloc(sizeof(t_ray_cast));
 	map_info->image = mlx_new_image(mlx, WIN_SIZE_X, WIN_SIZE_Y);
+	dir_xmp_file_to_image(mlx, map_info, &wall_image_set);
+	map_info->wall_image_set = wall_image_set;
 	ray_init(map_info, ray_info);
 	ray_input_win(map_info, ray_info, mlx, win);
 	total->map_info = map_info;
@@ -40,49 +43,60 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int idx)
 {
 	int		wall_size;
-	char	*data_addr;
+	char	*data_addr;			// main_image_addr
 	int		bpp;
 	int		size_line;
 	int		endian;
 	int 	pixel;
 	int		x;
 	int		y;
-	int		tmp;
+	t_img	*wall_image;
 
+	x = idx;
  	data_addr = mlx_get_data_addr(map_info->image, &bpp, &size_line, &endian);
 	wall_size = get_wall_size(map_info, distance);
-	x = idx;
+	// image_ptr 지정
 	if (map_info->wall_dir == WALL_E)
-		tmp = 0;
+		wall_image = &(map_info->wall_image_set[EA]);
 	else if (map_info->wall_dir == WALL_W)
-		tmp = 50;
+		wall_image = &(map_info->wall_image_set[WE]);
 	else if (map_info->wall_dir == WALL_S)
-		tmp = 100;
+		wall_image = &(map_info->wall_image_set[SO]);
 	else if (map_info->wall_dir == WALL_N)
-		tmp = 150;
-	for (y = 0; y < WIN_SIZE_Y; y++)
+		wall_image = &(map_info->wall_image_set[NO]);
+	if (wall_size < WIN_SIZE_Y)
 	{
-		pixel = (y * size_line) + (x * (bpp / 8));
-		if (y < abs(WIN_SIZE_Y - wall_size) / 2)
+		for (y = 0; y < WIN_SIZE_Y; y++)
 		{
-			data_addr[pixel] = map_info->ceiling_b;       // 블루 채널
-			data_addr[pixel + 1] = map_info->ceiling_g;   // 그린 채널
-			data_addr[pixel + 2] = map_info->ceiling_r; // 레드 채널
-			// data_addr[pixel + 3] = 0; // 알파 채널 (필요한 경우)
+			pixel = (y * size_line) + (x * (bpp / 8));
+			if (y < abs(WIN_SIZE_Y - wall_size) / 2)
+			{
+				data_addr[pixel] = map_info->ceiling_b;       // 블루 채널
+				data_addr[pixel + 1] = map_info->ceiling_g;   // 그린 채널
+				data_addr[pixel + 2] = map_info->ceiling_r; // 레드 채널
+			}
+			else if (y < abs(WIN_SIZE_Y - wall_size) / 2 + wall_size)
+			{
+				data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);       // 블루 채널
+				data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);   // 그린 채널
+				data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2); // 레드 채널
+			}
+			else
+			{
+				data_addr[pixel] = map_info->floor_b;       // 블루 채널
+				data_addr[pixel + 1] = map_info->floor_g;   // 그린 채널
+				data_addr[pixel + 2] = map_info->floor_r; // 레드 채널
+			}
 		}
-		else if (y < abs(WIN_SIZE_Y - wall_size) / 2 + wall_size)
+	}
+	else
+	{
+		for (y = 0; y < WIN_SIZE_Y; y++)
 		{
-			data_addr[pixel] = tmp;       // 블루 채널
-			data_addr[pixel + 1] = 0;   // 그린 채널
-			data_addr[pixel + 2] = 0; // 레드 채널
-			// data_addr[pixel + 3] = 0; // 알파 채널 (필요한 경우)
-		}
-		else
-		{
-			data_addr[pixel] = map_info->floor_b;       // 블루 채널
-			data_addr[pixel + 1] = map_info->floor_g;   // 그린 채널
-			data_addr[pixel + 2] = map_info->floor_r; // 레드 채널
-			// data_addr[pixel + 3] = 0; // 알파 채널 (필요한 경우)
+			pixel = (y * size_line) + (x * (bpp / 8));
+			data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);       // 블루 채널
+			data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);   // 그린 채널
+			data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2); // 레드 채널
 		}
 	}
 }
@@ -91,8 +105,8 @@ static int	get_wall_size(t_map_info *map_info, double distance)
 {
 	double	wall_size;
 
-	if (distance < R_SIZE)
-		return (WIN_SIZE_Y);
+	// if (distance < R_SIZE)
+	// 	return (WIN_SIZE_Y);
 	wall_size = ((WIN_SIZE_Y / distance) * R_SIZE);
 	return((int)wall_size);
 }
@@ -173,19 +187,10 @@ static void	handle_keyhook(int keycode, void *param)
 		converttounitvector(ray_info->dir_x, ray_info->dir_y, &ray_info->dir_x, &ray_info->dir_y);
 		plane_angle(ray_info);
 	}
-	printf("dir_x:%lf / dir_y:%lf\n",ray_info->dir_x, ray_info->dir_y);
-	printf("pos_x:%lf / pos_y:%lf\n",ray_info->pos_x, ray_info->pos_y);
-	printf("plane_x:%lf / plane_y:%lf\n",ray_info->plane_x, ray_info->plane_y);
+	// printf("dir_x:%lf / dir_y:%lf\n",ray_info->dir_x, ray_info->dir_y);
+	// printf("pos_x:%lf / pos_y:%lf\n",ray_info->pos_x, ray_info->pos_y);
+	// printf("plane_x:%lf / plane_y:%lf\n",ray_info->plane_x, ray_info->plane_y);
 	ray_input_win(total_info->map_info, total_info->ray_info, total_info->mlx, total_info->win);
 	// 움직일때 벽 통과 해결해야됨, 각도 제대로 변하는 지 확인해야함
 }
 
-
-// bool [TRUE down left right]
-//1
-//1
-//1
-//1 뗌
-
-// key_hook <- 통해서 입력이 감지된 순간에는 
-// mlx_loop_hook <- 이미지를 다시 그린다.

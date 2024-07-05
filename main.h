@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
+/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/04 22:14:39 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/05 19:12:30 by taekhkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_temp;
 
+typedef struct s_img
+{
+	int			type;
+	void		*img_ptr;
+	char		*data;
+	int			width;
+	int			height;
+	int			bits_per_pixel;
+	int			size_line;
+	int			endian;
+}	t_img;
+
 typedef struct map_info
 {
 	char	*no_filename;
@@ -90,6 +102,7 @@ typedef struct map_info
 	int		wall_dir;
 	double	x_hit;
 	double	y_hit;
+	t_img	*wall_image_set;
 }	t_map_info;
 
 typedef struct single_node
@@ -117,16 +130,7 @@ typedef struct total_info
 	t_ray_cast	*ray_info;
 }	t_total;
 
-typedef struct s_img
-{
-	void		*img_ptr;
-	char		*data;
-	int			width;
-	int			height;
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
-}	t_img;
+
 
 
 // map_parsing.dir -------------------------------------
@@ -199,4 +203,10 @@ void 		rotatecounterclockwise(double a, double b, double theta, double *newX, do
 
 // temp
 void	display_map(t_map_info *map_info);
+
+// xpm_to_image.c
+void	dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
+
+// get_pixel_in_wall.c
+int	get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int wall_size, int py, int rgb);
 #endif
