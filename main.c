@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:54:09 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/05 18:33:33 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:47:29 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	display_map(t_map_info *map_info)
 		j = 0;
 		while (j < map_info->map_size_x)
 		{
-			printf("%c",map_info->map[i][j]);
+			printf("%c", map_info->map[i][j]);
 			j++;
 		}
 		i++;

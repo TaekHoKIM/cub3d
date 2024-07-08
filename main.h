@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/05 19:12:30 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:03:33 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include "./mlx/mlx.h"
 # include <math.h>
 # include <sys/time.h>
-
 
 # define SUCCESS 0
 # define FAIL -1
@@ -50,7 +49,6 @@
 # define WALL_S 1
 # define WALL_W 2
 # define WALL_E 3
-# define FRAME_TIME_MICROSEC (1000000 / 60) // 60 FPS
 
 enum	e_dir{
 	NO = 0,
@@ -113,25 +111,22 @@ typedef struct single_node
 
 typedef struct ray_cast
 {
-	double	pos_x;			// 내 위치
+	double	pos_x;
 	double	pos_y;
-	double	dir_x;			// 바라보는 방향
+	double	dir_x;
 	double	dir_y;
-	double	plane_x;		// 시야 평면 방향
+	double	plane_x;
 	double	plane_y;
 
 }	t_ray_cast;
 
 typedef struct total_info
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
 	t_map_info	*map_info;
 	t_ray_cast	*ray_info;
 }	t_total;
-
-
-
 
 // map_parsing.dir -------------------------------------
 // get_next_line_bonus.c
@@ -195,18 +190,18 @@ void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
 
 // math_utils.c
 double		calculatedistance(double x1, double y1, double x2, double y2);
-void		converttounitvector(double a, double b, double *unitA, double *unitB);
+void		converttounitvector(double a, double b,
+				double *unitA, double *unitB);
 double		distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit);
-void 		rotateclockwise(double a, double b, double theta, double *newX, double *newY);
-void 		rotatecounterclockwise(double a, double b, double theta, double *newX, double *newY);
-
+void		rotateclockwise(double a, double b, double theta, double *newX, double *newY);
+void		rotatecounterclockwise(double a, double b, double theta, double *newX, double *newY);
 
 // temp
-void	display_map(t_map_info *map_info);
+void		display_map(t_map_info *map_info);
 
 // xpm_to_image.c
-void	dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
+void		dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
 
 // get_pixel_in_wall.c
-int	get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int wall_size, int py, int rgb);
+int			get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int wall_size, int py, int rgb);
 #endif

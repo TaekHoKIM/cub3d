@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_cast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/05 20:01:17 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:31:46 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,11 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 	mlx_loop_hook(mlx, rendering_loop, (void *)total);
 	mlx_hook(win, 2, 1L<<0, handle_keyhook, (void *)total);
 }
-// 이미지 
-// 렌더링 함수 -> 이미지를 계속 그리기만 하고 <- 이미지를 그릴 때 사용되는 조건들
-// 키입력 함수 -> 
 
 void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int idx)
 {
 	int		wall_size;
-	char	*data_addr;			// main_image_addr
+	char	*data_addr;
 	int		bpp;
 	int		size_line;
 	int		endian;
@@ -55,7 +52,6 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 	x = idx;
  	data_addr = mlx_get_data_addr(map_info->image, &bpp, &size_line, &endian);
 	wall_size = get_wall_size(map_info, distance);
-	// image_ptr 지정
 	if (map_info->wall_dir == WALL_E)
 		wall_image = &(map_info->wall_image_set[EA]);
 	else if (map_info->wall_dir == WALL_W)
@@ -71,21 +67,21 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 			pixel = (y * size_line) + (x * (bpp / 8));
 			if (y < abs(WIN_SIZE_Y - wall_size) / 2)
 			{
-				data_addr[pixel] = map_info->ceiling_b;       // 블루 채널
-				data_addr[pixel + 1] = map_info->ceiling_g;   // 그린 채널
-				data_addr[pixel + 2] = map_info->ceiling_r; // 레드 채널
+				data_addr[pixel] = map_info->ceiling_b;
+				data_addr[pixel + 1] = map_info->ceiling_g;
+				data_addr[pixel + 2] = map_info->ceiling_r;
 			}
 			else if (y < abs(WIN_SIZE_Y - wall_size) / 2 + wall_size)
 			{
-				data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);       // 블루 채널
-				data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);   // 그린 채널
-				data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2); // 레드 채널
+				data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);
+				data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);
+				data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2);
 			}
 			else
 			{
-				data_addr[pixel] = map_info->floor_b;       // 블루 채널
-				data_addr[pixel + 1] = map_info->floor_g;   // 그린 채널
-				data_addr[pixel + 2] = map_info->floor_r; // 레드 채널
+				data_addr[pixel] = map_info->floor_b;
+				data_addr[pixel + 1] = map_info->floor_g;
+				data_addr[pixel + 2] = map_info->floor_r;
 			}
 		}
 	}
@@ -94,9 +90,9 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 		for (y = 0; y < WIN_SIZE_Y; y++)
 		{
 			pixel = (y * size_line) + (x * (bpp / 8));
-			data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);       // 블루 채널
-			data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);   // 그린 채널
-			data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2); // 레드 채널
+			data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);
+			data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);
+			data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2);
 		}
 	}
 }
@@ -105,10 +101,8 @@ static int	get_wall_size(t_map_info *map_info, double distance)
 {
 	double	wall_size;
 
-	// if (distance < R_SIZE)
-	// 	return (WIN_SIZE_Y);
 	wall_size = ((WIN_SIZE_Y / distance) * R_SIZE);
-	return((int)wall_size);
+	return ((int)wall_size);
 }
 
 static void	rendering_loop(void *param)
@@ -117,7 +111,8 @@ static void	rendering_loop(void *param)
 	int				i;
 
 	total_info = (t_total *)param;
-	mlx_put_image_to_window(total_info->mlx, total_info->win, total_info->map_info->image, 0, 0);
+	mlx_put_image_to_window(total_info->mlx, total_info->win,
+		total_info->map_info->image, 0, 0);
 }
 
 static void	handle_keyhook(int keycode, void *param)
@@ -129,7 +124,6 @@ static void	handle_keyhook(int keycode, void *param)
 	total_info = (t_total *)param;
 	ray_info = total_info->ray_info;
 	theta = 1.0 * M_PI / 180.0 * R_ANGLE;
-	// key 이동 이상함 - 위치 이동 문제
 	if (keycode == ESC)
 	{
 		printf("ESC key pressed. Exiting...\n");
@@ -177,20 +171,20 @@ static void	handle_keyhook(int keycode, void *param)
 	}
 	else if (keycode == RIGHT_ARROW_KEY)
 	{
-		rotatecounterclockwise(ray_info->dir_x, ray_info->dir_y,theta, &ray_info->dir_x, &ray_info->dir_y);
-		converttounitvector(ray_info->dir_x, ray_info->dir_y, &ray_info->dir_x, &ray_info->dir_y);
+		rotatecounterclockwise(ray_info->dir_x, ray_info->dir_y, theta,
+			&ray_info->dir_x, &ray_info->dir_y);
+		converttounitvector(ray_info->dir_x, ray_info->dir_y,
+			&ray_info->dir_x, &ray_info->dir_y);
 		plane_angle(ray_info);
 	}
 	else if (keycode == LEFT_ARROW_KEY)
 	{
-		rotateclockwise(ray_info->dir_x, ray_info->dir_y,theta, &ray_info->dir_x, &ray_info->dir_y);
-		converttounitvector(ray_info->dir_x, ray_info->dir_y, &ray_info->dir_x, &ray_info->dir_y);
+		rotateclockwise(ray_info->dir_x, ray_info->dir_y, theta,
+			&ray_info->dir_x, &ray_info->dir_y);
+		converttounitvector(ray_info->dir_x, ray_info->dir_y,
+			&ray_info->dir_x, &ray_info->dir_y);
 		plane_angle(ray_info);
 	}
-	// printf("dir_x:%lf / dir_y:%lf\n",ray_info->dir_x, ray_info->dir_y);
-	// printf("pos_x:%lf / pos_y:%lf\n",ray_info->pos_x, ray_info->pos_y);
-	// printf("plane_x:%lf / plane_y:%lf\n",ray_info->plane_x, ray_info->plane_y);
-	ray_input_win(total_info->map_info, total_info->ray_info, total_info->mlx, total_info->win);
-	// 움직일때 벽 통과 해결해야됨, 각도 제대로 변하는 지 확인해야함
+	ray_input_win(total_info->map_info, total_info->ray_info,
+		total_info->mlx, total_info->win);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:27:49 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/03 16:10:10 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:33:12 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	plane_angle(t_ray_cast *ray_info)
 {
 	ray_info->plane_x = ray_info->dir_y;
 	ray_info->plane_y = -1 * ray_info->dir_x;
-	converttounitvector(ray_info->plane_x, ray_info->plane_y, &ray_info->plane_x, &ray_info->plane_y);
+	converttounitvector(ray_info->plane_x, ray_info->plane_y,
+		&ray_info->plane_x, &ray_info->plane_y);
 	return ;
 }
