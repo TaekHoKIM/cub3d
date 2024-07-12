@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/08 16:03:33 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:44:12 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,9 +162,16 @@ char		*ft_strtrim(char const *s1, char const *set);
 // map_input_texutre.c
 void		map_input_texture(int fd, t_map_info *map_info);
 
+// map_input_rgb_sub.c
+void	input_rgb_sub1(char *line, t_map_info *map_info);
+
 // map_input_rgb.c
 void		map_input_rgb(int fd, t_map_info *map_info);
+void		check_num(char **split_set);
+void		check_comma(char *line);
 
+// map_input_map_utils.c
+int			check_valid_and_input(t_node **start, char *line);
 // map_input_map.c
 void		input_map(int fd, t_map_info *map_info);
 

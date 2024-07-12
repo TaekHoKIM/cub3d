@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_input_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:29:39 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:43 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/10 18:38:28 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,8 @@ static void	input_texture_sub1(char *line, t_map_info *map_info)
 	}
 }
 
-static void	input_texture_sub2(char *line, t_map_info *map_info, int i)
+static void	input_texture_dir(t_map_info *map_info, char *tmp, int i)
 {
-	char	*sub_str;
-	char	*tmp;
-	int		len;
-
-	len = ft_strlen(line);
-	sub_str = ft_substr(line, 3, len - 4);
-	tmp = ft_strtrim(sub_str, " ");
-	free(sub_str);
 	if (i == 0)
 	{
 		if (map_info->no_filename != NULL)
@@ -96,6 +88,19 @@ static void	input_texture_sub2(char *line, t_map_info *map_info, int i)
 			exit(EXIT_FAILURE);
 		map_info->ea_filename = tmp;
 	}
+}
+
+static void	input_texture_sub2(char *line, t_map_info *map_info, int i)
+{
+	char	*sub_str;
+	char	*tmp;
+	int		len;
+
+	len = ft_strlen(line);
+	sub_str = ft_substr(line, 3, len - 4);
+	tmp = ft_strtrim(sub_str, " ");
+	free(sub_str);
+	input_texture_dir(map_info, tmp, i);
 }
 
 static int	check_full_texture(t_map_info *map_info)

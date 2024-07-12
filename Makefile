@@ -5,7 +5,9 @@ SOURS = 						./map_parsing/map_parse.c								\
 								./map_parsing/ft_sub.c									\
 								./map_parsing/get_next_line_bonus.c						\
 								./map_parsing/get_next_line_utils_bonus.c				\
+								./map_parsing/map_input_map_utils.c						\
 								./map_parsing/map_input_map.c							\
+								./map_parsing/map_input_rgb_sub.c						\
 								./map_parsing/map_input_rgb.c							\
 								./map_parsing/map_input_texture.c						\
 								./map_parsing/map_make_map.c							\
