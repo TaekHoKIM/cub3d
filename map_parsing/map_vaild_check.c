@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_vaild_check.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:51 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:29:08 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ static int	check_surround(char **map, int width, int height)
 	i = 0;
 	while (i < height)
 	{
-		j = 0;
-		while (j < width)
+		j = -1;
+		while (++j < width)
 		{
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S'
 					|| (map[i][j] == 'E') || map[i][j] == 'W')
@@ -85,11 +85,35 @@ static int	check_surround(char **map, int width, int height)
 				if ((i - 1 >= 0) && (map[i - 1][j] == ' '))
 					return (FAIL);
 			}
-			j++;
 		}
 		i++;
 	}
 	return (SUCCESS);
+}
+
+static int	check_zero(char **map, int cnt, int i, int flag)
+{
+	int	j;
+
+	j = 0;
+	if (flag == WIDTH)
+	{
+		while (j < cnt)
+		{
+			if (map[i][j] == '0')
+				return (FAIL);
+			j++;
+		}
+	}
+	else if (flag == HEIGHT)
+	{
+		while (j < cnt)
+		{
+			if (map[j][i] == '0')
+				return (FAIL);
+			j++;
+		}
+	}
 }
 
 static int	check_outside_zero(char **map, int width, int height)
@@ -97,37 +121,13 @@ static int	check_outside_zero(char **map, int width, int height)
 	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (j < width)
-	{
-		if (map[i][j] == '0')
-			return (FAIL);
-		j++;
-	}
-	i = height - 1;
-	j = 0;
-	while (j < width)
-	{
-		if (map[i][j] == '0')
-			return (FAIL);
-		j++;
-	}
-	j = 0;
-	i = 0;
-	while (i < height)
-	{
-		if (map[i][j] == '0')
-			return (FAIL);
-		i++;
-	}
-	j = width - 1;
-	i = 0;
-	while (i < height)
-	{
-		if (map[i][j] == '0')
-			return (FAIL);
-		i++;
-	}
+	if (check_zero(map, width, 0, WIDTH) == FAIL)
+		return (FAIL);
+	if (check_zero(map, width, height - 1, WIDTH) == FAIL)
+		return (FAIL);
+	if (check_zero(map, height, 0, HEIGHT) == FAIL)
+		return (FAIL);
+	if (check_zero(map, height, width - 1, HEIGHT) == FAIL)
+		return (FAIL);
 	return (SUCCESS);
 }

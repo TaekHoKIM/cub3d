@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_make_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:23:55 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/03 13:57:55 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:14:37 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	map_input_line(t_node *start, char **map)
 	while (tmp != NULL)
 	{
 		rm_node = tmp;
-		copy_str = (char *)malloc(sizeof(char) * (ft_strlen(tmp->map_line) + 1));
+		copy_str = malloc(sizeof(char) * (ft_strlen(tmp->map_line) + 1));
 		i = 0;
 		while (tmp->map_line[i] != '\0')
 		{

@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:44:12 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:27:45 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@
 # define WALL_S 1
 # define WALL_W 2
 # define WALL_E 3
+# define WIDTH 0
+# define HEIGHT 1
 
 enum	e_dir{
 	NO = 0,
