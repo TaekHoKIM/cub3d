@@ -18,6 +18,7 @@ SOURS = 						./map_parsing/map_parse.c								\
 								./ray_casting/ray_input_win.c							\
 								./ray_casting/math_utils.c								\
 								./ray_casting/get_pixel_in_wall.c						\
+								./ray_casting/rotate.c									\
 								./main.c
 	
 MAN_OBJS = ${SOURS:.c=.o}

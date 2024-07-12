@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parse.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:55:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/03 14:19:10 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:23:52 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_map_info	*map_parsing(char *map_name)
 	if (map_info == NULL)
 		exit(EXIT_FAILURE);
 	fd = open(map_name, O_RDONLY);
-	if (fd == -1)
+	if (fd == FAIL)
 		exit(EXIT_FAILURE);
 	map_init(map_info);
 	map_input_texture(fd, map_info);

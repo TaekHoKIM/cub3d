@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/12 16:27:45 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:01:22 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_img
 	int			bits_per_pixel;
 	int			size_line;
 	int			endian;
+	int			wall_size;
 }	t_img;
 
 typedef struct map_info
@@ -202,8 +203,10 @@ double		calculatedistance(double x1, double y1, double x2, double y2);
 void		converttounitvector(double a, double b,
 				double *unitA, double *unitB);
 double		distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit);
-void		rotateclockwise(double a, double b, double theta, double *newX, double *newY);
-void		rotatecounterclockwise(double a, double b, double theta, double *newX, double *newY);
+
+// rotate.c
+void		rotateclockwise(double *ab, double theta, double *newX, double *newY);
+void		rotatecounterclockwise(double *ab, double theta, double *newX, double *newY);
 
 // temp
 void		display_map(t_map_info *map_info);
@@ -212,5 +215,5 @@ void		display_map(t_map_info *map_info);
 void		dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
 
 // get_pixel_in_wall.c
-int			get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int wall_size, int py, int rgb);
+int			get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int py, int rgb);
 #endif

@@ -6,14 +6,14 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/08 16:31:46 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:02:15 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
 static int	get_wall_size(t_map_info *map_info, double distance);
-static void	rendering_loop(void *param);
+static int	rendering_loop(void *param);
 static void	handle_keyhook(int keycode, void *param);
 
 int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
@@ -34,12 +34,12 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 	total->mlx = mlx;
 	total->win = win;
 	mlx_loop_hook(mlx, rendering_loop, (void *)total);
-	mlx_hook(win, 2, 1L<<0, handle_keyhook, (void *)total);
+	mlx_hook(win, 2, 1L << 0, handle_keyhook, (void *)total);
+	return (SUCCESS);
 }
 
 void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int idx)
 {
-	int		wall_size;
 	char	*data_addr;
 	int		bpp;
 	int		size_line;
@@ -51,7 +51,6 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 
 	x = idx;
  	data_addr = mlx_get_data_addr(map_info->image, &bpp, &size_line, &endian);
-	wall_size = get_wall_size(map_info, distance);
 	if (map_info->wall_dir == WALL_E)
 		wall_image = &(map_info->wall_image_set[EA]);
 	else if (map_info->wall_dir == WALL_W)
@@ -60,22 +59,23 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 		wall_image = &(map_info->wall_image_set[SO]);
 	else if (map_info->wall_dir == WALL_N)
 		wall_image = &(map_info->wall_image_set[NO]);
-	if (wall_size < WIN_SIZE_Y)
+	wall_image->wall_size = get_wall_size(map_info, distance);
+	if (wall_image->wall_size < WIN_SIZE_Y)
 	{
 		for (y = 0; y < WIN_SIZE_Y; y++)
 		{
 			pixel = (y * size_line) + (x * (bpp / 8));
-			if (y < abs(WIN_SIZE_Y - wall_size) / 2)
+			if (y < abs(WIN_SIZE_Y - wall_image->wall_size) / 2)
 			{
 				data_addr[pixel] = map_info->ceiling_b;
 				data_addr[pixel + 1] = map_info->ceiling_g;
 				data_addr[pixel + 2] = map_info->ceiling_r;
 			}
-			else if (y < abs(WIN_SIZE_Y - wall_size) / 2 + wall_size)
+			else if (y < abs(WIN_SIZE_Y - wall_image->wall_size) / 2 + wall_image->wall_size)
 			{
-				data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);
-				data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);
-				data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2);
+				data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, y, 0);
+				data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, y, 1);
+				data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, y, 2);
 			}
 			else
 			{
@@ -90,9 +90,9 @@ void	put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int 
 		for (y = 0; y < WIN_SIZE_Y; y++)
 		{
 			pixel = (y * size_line) + (x * (bpp / 8));
-			data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 0);
-			data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 1);
-			data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, wall_size, y, 2);
+			data_addr[pixel] = get_wall_pixel_rgb(map_info, wall_image, y, 0);
+			data_addr[pixel + 1] = get_wall_pixel_rgb(map_info, wall_image, y, 1);
+			data_addr[pixel + 2] = get_wall_pixel_rgb(map_info, wall_image, y, 2);
 		}
 	}
 }
@@ -105,7 +105,7 @@ static int	get_wall_size(t_map_info *map_info, double distance)
 	return ((int)wall_size);
 }
 
-static void	rendering_loop(void *param)
+static int	rendering_loop(void *param)
 {
 	t_total			*total_info;
 	int				i;
@@ -113,6 +113,7 @@ static void	rendering_loop(void *param)
 	total_info = (t_total *)param;
 	mlx_put_image_to_window(total_info->mlx, total_info->win,
 		total_info->map_info->image, 0, 0);
+	return (SUCCESS);
 }
 
 static void	handle_keyhook(int keycode, void *param)
@@ -171,7 +172,7 @@ static void	handle_keyhook(int keycode, void *param)
 	}
 	else if (keycode == RIGHT_ARROW_KEY)
 	{
-		rotatecounterclockwise(ray_info->dir_x, ray_info->dir_y, theta,
+		rotatecounterclockwise((double []){ray_info->dir_x, ray_info->dir_y}, theta,
 			&ray_info->dir_x, &ray_info->dir_y);
 		converttounitvector(ray_info->dir_x, ray_info->dir_y,
 			&ray_info->dir_x, &ray_info->dir_y);
@@ -179,7 +180,7 @@ static void	handle_keyhook(int keycode, void *param)
 	}
 	else if (keycode == LEFT_ARROW_KEY)
 	{
-		rotateclockwise(ray_info->dir_x, ray_info->dir_y, theta,
+		rotateclockwise((double []){ray_info->dir_x, ray_info->dir_y}, theta,
 			&ray_info->dir_x, &ray_info->dir_y);
 		converttounitvector(ray_info->dir_x, ray_info->dir_y,
 			&ray_info->dir_x, &ray_info->dir_y);

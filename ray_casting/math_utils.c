@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 17:20:02 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/08 16:26:36 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/12 21:01:03 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,4 @@ static double	distance_point_to_line(t_ray_cast *ray_info, double x, double y)
 double	distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit)
 {
 	return (distance_point_to_line(ray_info, x_hit, y_hit));
-}
-
-void	rotateclockwise(double a, double b, double theta, double *newX, double *newY)
-{
-	double	cos_theta;
-	double	sin_theta;
-
-	cos_theta = cos(theta);
-	sin_theta = sin(theta);
-	*newX = cos_theta * a - sin_theta * b;
-	*newY = cos_theta * b + sin_theta * a;
-}
-
-// 반시계 방향으로 각도 theta 만큼 회전한 벡터를 계산하는 함수
-void	rotatecounterclockwise(double a, double b, double theta, double *newX, double *newY)
-{
-	double	cos_theta;
-	double	sin_theta;
-
-	cos_theta = cos(theta);
-	sin_theta = sin(theta);
-	*newX = cos_theta * a + sin_theta * b;
-	*newY = -sin_theta * a + cos_theta * b;
 }
