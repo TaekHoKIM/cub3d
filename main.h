@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/12 21:01:22 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:56:07 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_img
 	int			wall_size;
 }	t_img;
 
-typedef struct map_info
+typedef struct s_map_info
 {
 	char	*no_filename;
 	char	*so_filename;
@@ -106,13 +106,13 @@ typedef struct map_info
 	t_img	*wall_image_set;
 }	t_map_info;
 
-typedef struct single_node
+typedef struct s_single_node
 {
-	char				*map_line;
-	struct single_node	*next;
+	char					*map_line;
+	struct s_single_node	*next;
 }	t_node;
 
-typedef struct ray_cast
+typedef struct s_ray_cast
 {
 	double	pos_x;
 	double	pos_y;
@@ -120,10 +120,9 @@ typedef struct ray_cast
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-
 }	t_ray_cast;
 
-typedef struct total_info
+typedef struct s_total_info
 {
 	void		*mlx;
 	void		*win;
@@ -131,7 +130,20 @@ typedef struct total_info
 	t_ray_cast	*ray_info;
 }	t_total;
 
+typedef struct s_data
+{
+	char	*addr;
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		pixel;
+}	t_data;
+
 // map_parsing.dir -------------------------------------
+
+// ft_malloc.c
+void		*ft_malloc(size_t size, size_t cnt);
+
 // get_next_line_bonus.c
 char		*get_next_line(int fd);
 char		*result(t_temp *c_node, t_temp **start, char *restr);
@@ -166,7 +178,7 @@ char		*ft_strtrim(char const *s1, char const *set);
 void		map_input_texture(int fd, t_map_info *map_info);
 
 // map_input_rgb_sub.c
-void	input_rgb_sub1(char *line, t_map_info *map_info);
+void		input_rgb_sub1(char *line, t_map_info *map_info);
 
 // map_input_rgb.c
 void		map_input_rgb(int fd, t_map_info *map_info);
@@ -188,15 +200,14 @@ void		map_vaild_check(char **map);
 
 // rat_cast
 int			ray_cast(t_map_info *map_info, void	*mlx, void *win);
-void		put_pixel(t_map_info *map_info, void *mlx, void *win, double distance, int idx);
+void		put_pixel(t_total *total, double distance, int idx);
 
 // ray_init.c
-int			ray_init(t_map_info *map_info, t_ray_cast *ray_info);
+int			ray_init(t_total *total);
 void		plane_angle(t_ray_cast *ray_info);
 
 // ray_input_win.c
-void		ray_input_win(t_map_info *map_info, t_ray_cast *ray_info,
-				void *mlx, void *win);
+void		ray_input_win(t_total *total);
 
 // math_utils.c
 double		calculatedistance(double x1, double y1, double x2, double y2);
@@ -205,8 +216,10 @@ void		converttounitvector(double a, double b,
 double		distance_plane(t_ray_cast *ray_info, double x_hit, double y_hit);
 
 // rotate.c
-void		rotateclockwise(double *ab, double theta, double *newX, double *newY);
-void		rotatecounterclockwise(double *ab, double theta, double *newX, double *newY);
+void		rotateclockwise(double *ab, double theta,
+				double *newX, double *newY);
+void		rotatecounterclockwise(double *ab, double theta,
+				double *newX, double *newY);
 
 // temp
 void		display_map(t_map_info *map_info);
@@ -215,5 +228,26 @@ void		display_map(t_map_info *map_info);
 void		dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
 
 // get_pixel_in_wall.c
-int			get_wall_pixel_rgb(t_map_info *map_info, t_img *wall_img, int py, int rgb);
+int			get_wall_pixel_rgb(t_total *total,
+				t_img *wall_img, int py, int rgb);
+
+// put_pixel.c
+void		put_pixel(t_total *total, double distance, int idx);
+
+// handle_keyhook.c
+int			handle_keyhook(int keycode, void *param);
+
+// ray_distance_x_quadrant.c
+double		ray_distance_x(t_total *total, double a, double b);
+
+// ray_distance_y_quadrant.c
+double		ray_distance_y(t_total *total, double a, double b, int *flag);
+
+// wall_dir_change.c
+double		wall_dir_change(t_total *total,
+				double x_dis, double y_dis, int flag);
+
+// ray_distance_x_y_zero.c 
+double		ray_distance_x_y_zero(t_total *total, double a, double b);
+
 #endif

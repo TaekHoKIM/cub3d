@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/12 16:29:08 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:09:37 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static int	check_zero(char **map, int cnt, int i, int flag)
 			j++;
 		}
 	}
+	return (SUCCESS);
 }
 
 static int	check_outside_zero(char **map, int width, int height)
