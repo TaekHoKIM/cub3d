@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:23:55 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/12 16:14:37 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:32:23 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**map_make_map(t_node *start)
 	char	**map;
 
 	count = map_count(start);
-	map = (char **)malloc(sizeof(char *) * (count + 1));
+	map = ft_malloc(sizeof(char *), (count + 1));
 	i = 0;
 	while (i < count + 1)
 	{
@@ -65,7 +65,7 @@ static void	map_input_line(t_node *start, char **map)
 	while (tmp != NULL)
 	{
 		rm_node = tmp;
-		copy_str = malloc(sizeof(char) * (ft_strlen(tmp->map_line) + 1));
+		copy_str = ft_malloc(sizeof(char), (ft_strlen(tmp->map_line) + 1));
 		i = 0;
 		while (tmp->map_line[i] != '\0')
 		{
@@ -98,7 +98,7 @@ static void	map_fitting(char **map)
 	i = 0;
 	while (map[i] != NULL)
 	{
-		new_line = (char *)malloc(sizeof(char) * (max_len + 1));
+		new_line = ft_malloc(sizeof(char), (max_len + 1));
 		new_line[max_len] = '\0';
 		copy_line(map[i], new_line, max_len);
 		free(map[i]);

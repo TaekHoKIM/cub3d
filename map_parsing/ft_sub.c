@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:39:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 19:33:57 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:28:43 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		while (s[(size_t)start + max] != '\0' && max < len)
 			max++;
 	}
-	return_ptr = (char *)malloc(sizeof(char) * (max + 1));
-	if (return_ptr == NULL)
-		return (NULL);
+	return_ptr = ft_malloc(sizeof(char), (max + 1));
 	i = 0;
 	while (i < max)
 	{

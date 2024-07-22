@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:19:00 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/08 15:57:56 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:31:09 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ static void	file_check(char *file_name)
 
 void	dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img)
 {
-	*img = malloc(sizeof(t_img) * 4);
-	if (*img == NULL)
-		exit(EXIT_FAILURE);
+	*img = ft_malloc(sizeof(t_img), 4);
 	file_check(info->no_filename);
 	xpm_to_image(mlx_ptr, &((*img)[NO]), info->no_filename);
 	(*img)[NO].type = NO;

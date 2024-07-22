@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:14:36 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:24:54 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:30:15 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	input_node(t_node *start, char *line)
 	{
 		tmp = tmp->next;
 	}
-	new_node = (t_node *)malloc(sizeof(t_node));
+	new_node = ft_malloc(sizeof(t_node), 1);
 	new_node->map_line = line;
 	new_node->next = NULL;
 	tmp->next = new_node;
@@ -60,7 +60,7 @@ int	check_valid_and_input(t_node **start, char *line)
 	}
 	if ((*start) == NULL)
 	{
-		(*start) = (t_node *)malloc(sizeof(t_node));
+		(*start) = ft_malloc(sizeof(t_node), 1);
 		(*start)->map_line = line;
 		(*start)->next = NULL;
 	}

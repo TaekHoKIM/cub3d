@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:55:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/12 17:23:52 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:30:57 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ t_map_info	*map_parsing(char *map_name)
 	t_map_info	*map_info;
 	int			fd;
 
-	map_info = (t_map_info *)malloc(sizeof(t_map_info));
-	if (map_info == NULL)
-		exit(EXIT_FAILURE);
+	map_info = ft_malloc(sizeof(t_map_info), 1);
 	fd = open(map_name, O_RDONLY);
 	if (fd == FAIL)
 		exit(EXIT_FAILURE);

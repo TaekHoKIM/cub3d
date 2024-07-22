@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taekhkim <xorgh456@naver.com>              +#+  +:+       +#+        */
+/*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 14:42:22 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/06/26 16:56:23 by taekhkim         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:28:27 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ char	**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	count = array_count(s, c);
-	return_ptr = (char **)malloc(sizeof(char *) * (count + 1));
-	if (return_ptr == NULL)
-		return (NULL);
+	return_ptr = ft_malloc(sizeof(char *), (count + 1));
 	return_ptr[count] = NULL;
 	return_ptr = copy_str(return_ptr, s, c);
 	return (return_ptr);
