@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 20:55:37 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/22 21:08:36 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:14:38 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ double	ray_distance_y_zero(t_total *total, double a, double b)
 
 double	ray_distance_x_y_zero(t_total *total, double a, double b)
 {
-	
 	if (a == 0)
 		return (ray_distance_x_zero(total, a, b));
 	else if (b == 0)
