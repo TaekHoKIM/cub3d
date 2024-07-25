@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:50:35 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/22 20:42:50 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:36:51 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,12 @@ static void	wall_pixel_rgb(t_total *total, t_img *img, t_data *data, int idx)
 
 void	put_pixel(t_total *total, double distance, int idx)
 {
-	t_data	*data;
+	t_data	data;
 	t_img	*img;
 
-	data = ft_malloc(sizeof(t_data), 1);
-	data->addr = mlx_get_data_addr(total->map_info->image,
-			&data->bpp, &data->size_line, &data->endian);
+	data.addr = mlx_get_data_addr(total->map_info->image,
+			&data.bpp, &data.size_line, &data.endian);
 	img = wall_dir_image(total);
 	img->wall_size = get_wall_size(total->map_info, distance);
-	wall_pixel_rgb(total, img, data, idx);
+	wall_pixel_rgb(total, img, &data, idx);
 }
