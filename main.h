@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/22 20:56:07 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:37:44 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define WALL_E 3
 # define WIDTH 0
 # define HEIGHT 1
+# define CLICK_CROSS 17
 
 enum	e_dir{
 	NO = 0,
@@ -220,9 +221,6 @@ void		rotateclockwise(double *ab, double theta,
 				double *newX, double *newY);
 void		rotatecounterclockwise(double *ab, double theta,
 				double *newX, double *newY);
-
-// temp
-void		display_map(t_map_info *map_info);
 
 // xpm_to_image.c
 void		dir_xmp_file_to_image(void *mlx_ptr, t_map_info *info, t_img **img);
