@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:51:10 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/22 19:27:51 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:35:47 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 	ray_init(total);
 	ray_input_win(total);
 	mlx_loop_hook(mlx, rendering_loop, (void *)total);
+	mlx_hook(win, CLICK_CROSS, 0, exit, NULL);
 	mlx_hook(win, 2, 1L << 0, &handle_keyhook, (void *)total);
 	return (SUCCESS);
 }
