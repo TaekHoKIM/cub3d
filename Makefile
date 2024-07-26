@@ -1,4 +1,4 @@
-NAME	=	cub3d
+NAME	=	cub3D
 SOURS	= 						./map_parsing/map_parse.c								\
 								./map_parsing/ft_malloc.c								\
 								./map_parsing/ft_split.c								\

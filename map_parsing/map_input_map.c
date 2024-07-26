@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 15:32:34 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:25:15 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:51:29 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	input_start_info(t_map_info *map_info)
 		i++;
 	map_info->map_size_y = i;
 	if (i == 0)
-		exit(EXIT_FAILURE);
+		map_exit_error("map contents error\n");
 	map_info->map_size_x = ft_strlen(map[0]);
 	i = 0;
 	while (i < map_info->map_size_y)

@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:29:39 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:38:28 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:49:32 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	map_input_texture(int fd, t_map_info *map_info)
 	}
 	if (check_full_texture(map_info) == SUCCESS)
 		return ;
-	exit(EXIT_FAILURE);
+	map_exit_error("map texture error\n");
 }
 
 static void	input_texture_sub1(char *line, t_map_info *map_info)
@@ -67,25 +67,25 @@ static void	input_texture_dir(t_map_info *map_info, char *tmp, int i)
 	if (i == 0)
 	{
 		if (map_info->no_filename != NULL)
-			exit(EXIT_FAILURE);
+			map_exit_error("map texture error\n");
 		map_info->no_filename = tmp;
 	}
 	else if (i == 1)
 	{
 		if (map_info->so_filename != NULL)
-			exit(EXIT_FAILURE);
+			map_exit_error("map texture error\n");
 		map_info->so_filename = tmp;
 	}
 	else if (i == 2)
 	{
 		if (map_info->we_filename != NULL)
-			exit(EXIT_FAILURE);
+			map_exit_error("map texture error\n");
 		map_info->we_filename = tmp;
 	}
 	else if (i == 3)
 	{
 		if (map_info->ea_filename != NULL)
-			exit(EXIT_FAILURE);
+			map_exit_error("map texture error\n");
 		map_info->ea_filename = tmp;
 	}
 }

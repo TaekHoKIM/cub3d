@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:38:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:44:22 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:48:49 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	map_input_rgb(int fd, t_map_info *map_info)
 	}
 	if (check_full_rgb(map_info) == SUCCESS)
 		return ;
-	exit(EXIT_FAILURE);
+	map_exit_error("map rgb error\n");
 }
 
 static int	check_full_rgb(t_map_info *map_info)
@@ -68,7 +68,7 @@ void	check_num(char **split_set)
 	while (split_set[count] != NULL)
 		count++;
 	if (count != 3)
-		exit(EXIT_FAILURE);
+		map_exit_error("map rgb error\n");
 	count = 0;
 	while (count < 3)
 	{
@@ -76,7 +76,7 @@ void	check_num(char **split_set)
 		while (split_set[count][i] != '\0')
 		{
 			if (!('0' <= split_set[count][i] && split_set[count][i] <= '9'))
-				exit(EXIT_FAILURE);
+				map_exit_error("map rgb error\n");
 			i++;
 		}
 		count++;
@@ -98,6 +98,6 @@ void	check_comma(char *line)
 		i++;
 	}
 	if (count != 2)
-		exit(EXIT_FAILURE);
+		map_exit_error("map rgb error\n");
 	return ;
 }

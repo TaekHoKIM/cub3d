@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/22 21:09:37 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:50:22 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	map_vaild_check(char **map)
 	int	height;
 
 	if (map[0] == NULL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map vaild error\n");
 	width = ft_strlen(map[0]);
 	height = 0;
 	while (map[height] != NULL)
 		height++;
 	if (map_content_check(map, width, height) == FAIL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map vaild error\n");
 	if (check_outside_zero(map, width, height) == FAIL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map vaild error\n");
 	if (check_surround(map, width, height) == FAIL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map vaild error\n");
 }
 
 static int	map_content_check(char **map, int width, int height)

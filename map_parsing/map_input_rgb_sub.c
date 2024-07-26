@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 18:27:09 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/10 18:43:50 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:47:18 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	input_rgb_sub2(char *line, t_map_info *map_info, int flag)
 	{
 		l = ft_atoi(split_set[idx]);
 		if (!(0 <= l && l <= 255))
-			exit(EXIT_FAILURE);
+			map_exit_error("map rgb error\n");
 		input_rgb_sub3(map_info, flag, idx, l);
 		idx++;
 	}

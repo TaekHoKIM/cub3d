@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:55:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/22 18:30:57 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:50:04 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_map_info	*map_parsing(char *map_name)
 	map_info = ft_malloc(sizeof(t_map_info), 1);
 	fd = open(map_name, O_RDONLY);
 	if (fd == FAIL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map open error\n");
 	map_init(map_info);
 	map_input_texture(fd, map_info);
 	map_input_rgb(fd, map_info);

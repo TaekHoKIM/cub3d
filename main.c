@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 15:54:09 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:37:25 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:11:43 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,4 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	map_info = map_parsing(argv[1]);
 	ray_cast(map_info, mlx, win);
-	mlx_loop(mlx);
 }

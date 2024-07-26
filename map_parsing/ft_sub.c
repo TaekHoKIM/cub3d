@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 18:39:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/22 18:28:43 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 18:12:09 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,11 @@ char	*ft_strchr(const char *s, int c)
 	if (*s == (char)c)
 		return ((char *)s);
 	return (0);
+}
+
+void	map_exit_error(char *s)
+{
+	write(2, "Error\n", 6);
+	write(2, s, ft_strlen(s));
+	exit(EXIT_FAILURE);
 }

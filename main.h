@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 18:56:43 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:37:44 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/25 17:51:18 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ size_t		ft_strlen(const char *s);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 int			ft_atoi(const char *str);
 char		*ft_strchr(const char *s, int c);
+void		map_exit_error(char *s);
 
 // ft_split.c
 char		**ft_split(char const *s, char c);
