@@ -6,13 +6,13 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 18:50:35 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:36:51 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:49:06 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../main.h"
 
-static int	get_wall_size(t_map_info *map_info, double distance)
+static int	get_wall_size(double distance)
 {
 	double	wall_size;
 
@@ -92,6 +92,6 @@ void	put_pixel(t_total *total, double distance, int idx)
 	data.addr = mlx_get_data_addr(total->map_info->image,
 			&data.bpp, &data.size_line, &data.endian);
 	img = wall_dir_image(total);
-	img->wall_size = get_wall_size(total->map_info, distance);
+	img->wall_size = get_wall_size(distance);
 	wall_pixel_rgb(total, img, &data, idx);
 }

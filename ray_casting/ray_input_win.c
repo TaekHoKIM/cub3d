@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 16:52:51 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:27:28 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:48:48 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static double	ray_distance(t_total *total, int idx)
 {
 	double	a;
 	double	b;
-	int		point_x;
-	int		point_y;
 	double	tmp;
 
 	tmp = (2 * (double)DIR_DIS / WIN_SIZE_X) * idx;

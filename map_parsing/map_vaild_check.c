@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/22 16:40:19 by taekhkim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:50:22 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/26 19:48:28 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,6 @@ static int	check_zero(char **map, int cnt, int i, int flag)
 
 static int	check_outside_zero(char **map, int width, int height)
 {
-	int	i;
-	int	j;
-
 	if (check_zero(map, width, 0, WIDTH) == FAIL)
 		return (FAIL);
 	if (check_zero(map, width, height - 1, WIDTH) == FAIL)
