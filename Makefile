@@ -29,7 +29,7 @@ SOURS	= 						./map_parsing/map_parse.c								\
 								./main.c
 	
 MAN_OBJS = ${SOURS:.c=.o}
-HEADER_FILES =	./map_parsing/map_parse.h ./ray_casting/ray_cast.h ./main.h
+HEADER_FILES = ./main.h
 CC = cc
 CFLAG = -Wall -Wextra -Werror
 MLX_DIR = ./mlx
