@@ -6,7 +6,7 @@
 /*   By: minyekim <minyekim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 21:19:00 by minyekim          #+#    #+#             */
-/*   Updated: 2024/07/25 17:50:25 by minyekim         ###   ########.fr       */
+/*   Updated: 2024/07/26 18:42:32 by minyekim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	file_check(char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd == FAIL)
-		exit(EXIT_FAILURE);
+		map_exit_error("map texture error");
 	if (close(fd) == FAIL)
 		exit(EXIT_FAILURE);
 }
