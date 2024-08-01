@@ -106,5 +106,7 @@ int	handle_keyhook(int keycode, void *param)
 	else if (keycode == RIGHT_ARROW_KEY || keycode == LEFT_ARROW_KEY)
 		arrow_key(total, keycode);
 	ray_input_win(total);
+	mlx_put_image_to_window(total->mlx, total->win,
+		total->map_info->image, 0, 0);
 	return (0);
 }

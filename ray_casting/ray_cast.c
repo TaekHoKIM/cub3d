@@ -12,14 +12,7 @@
 
 #include "../main.h"
 
-static int	rendering_loop(void *param);
-
-int	exit_cross(void)
-{
-	exit(EXIT_SUCCESS);
-}
-
-int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
+t_total	*ray_cast(t_map_info *map_info, void *mlx, void *win)
 {
 	t_ray_cast		*ray_info;
 	t_img			*wall_image_set;
@@ -36,19 +29,7 @@ int	ray_cast(t_map_info *map_info, void	*mlx, void *win)
 	total->win = win;
 	ray_init(total);
 	ray_input_win(total);
-	mlx_loop_hook(mlx, rendering_loop, (void *)total);
-	mlx_hook(win, CLICK_CROSS, 0, exit_cross, NULL);
-	mlx_hook(win, 2, 1L << 0, &handle_keyhook, (void *)total);
-	mlx_loop(mlx);
-	return (SUCCESS);
-}
-
-static int	rendering_loop(void *param)
-{
-	t_total			*total_info;
-
-	total_info = (t_total *)param;
-	mlx_put_image_to_window(total_info->mlx, total_info->win,
-		total_info->map_info->image, 0, 0);
-	return (SUCCESS);
+	mlx_put_image_to_window(total->mlx, total->win,
+		total->map_info->image, 0, 0);
+	return (total);
 }

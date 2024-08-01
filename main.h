@@ -201,7 +201,7 @@ void		map_vaild_check(char **map);
 // map_parsing.dir -------------------------------------
 
 // rat_cast
-int			ray_cast(t_map_info *map_info, void	*mlx, void *win);
+t_total		*ray_cast(t_map_info *map_info, void *mlx, void *win);
 void		put_pixel(t_total *total, double distance, int idx);
 
 // ray_init.c
